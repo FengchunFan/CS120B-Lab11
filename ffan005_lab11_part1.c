@@ -45,37 +45,37 @@ int Tick(int state){
                         if(input == '\0'){
                                 output = 0x1F;
                         }else if (input == '1'){
-                                output = 0x01;
+                                output = 0x0D;
                         }else if (input == '2'){
-                                output = 0x02;
+                                output = 0x0C;
                         }else if (input == '3'){
-                                output = 0x03;
+                                output = 0x0B;
                         }else if (input == '4'){
-                                output = 0x04;
+                                output = 0x0F;
                         }else if (input == '5'){
-                                output = 0x05;
+                                output = 0x09;
                         }else if (input == '6'){
                                 output = 0x06;
                         }else if (input == '7'){
-                                output = 0x07;
+                                output = 0x00;
                         }else if (input == '8'){
                                 output = 0x08;
                         }else if (input == '9'){                   
-                                output = 0x09;
+                                output = 0x05;
                         }else if (input == 'A'){
                                 output = 0x0A;
                         }else if (input == 'B'){
-                                output = 0x0B;
+                                output = 0x03;
                         }else if (input == 'C'){
-                                output = 0x0C;
+                                output = 0x02;
                         }else if (input == 'D'){
-                                output = 0x0D;
+                                output = 0x01;
                         }else if (input == '*'){
                                 output = 0x0E;
                         }else if (input == '#'){
-                                output = 0x0F;
+                                output = 0x04;
                         }else if (input == '0'){
-                                output = 0x00;
+                                output = 0x07;
                         }else {
                                 output = 0x1B;
                         }
@@ -103,7 +103,7 @@ int main(void){
     task1.elapsedTime = task1.period;
     task1.TickFct = &Tick;
 
-    TimerSet(100);
+    TimerSet(50);
     TimerOn();
 
     unsigned short i;
