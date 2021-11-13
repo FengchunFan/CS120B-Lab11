@@ -119,7 +119,7 @@ int main(void){
     task1.state = start;
     task1.period = 50;
     task1.elapsedTime = task1.period;
-    task1.TickFct = &;
+    task1.TickFct = &Tick;
 
     TimerSet(100);
     TimerOn();
