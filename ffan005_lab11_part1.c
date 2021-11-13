@@ -23,6 +23,7 @@ enum States {Start,Init};
 unsigned char input = 0x00;
 unsigned char output = 0x00;
 
+//designed the state following the example
 int Tick(int state){
         input = GetKeypadKey();
 
