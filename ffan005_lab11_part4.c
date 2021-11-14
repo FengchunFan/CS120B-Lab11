@@ -6,7 +6,7 @@
  *
  *      I acknowledge all content contained herein, excluding template or example
  *      code, is my own original work.
- *      Demo: https://www.youtube.com/watch?v=Xc2OtteJ55c
+ *      Demo: 
  */
 
 #include <avr/io.h>
