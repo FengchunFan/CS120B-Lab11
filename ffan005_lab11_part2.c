@@ -19,41 +19,51 @@
 #include "simAVRHeader.h"
 #endif
 
-enum States {Start,Init};
-unsigned char MSG[40]={'C','S','1','2','0','B',' ','i','s',' ','L','e','g','e','n','d','.','.','.','w','a','i','t',' ','f','o','r',' ','i','t',' ','D','A','R','Y','!',' ',' ',' ',' '};
-unsigned char i = 0x00;
-unsigned char lcd[16];
 
-int Tick(int state){
-        switch(state){
+enum States {Start, Init};
+unsigned char MSG[40]={'C','S','1','2','0','B',' ','i','s',' ','L','e','g','e','n','d','.','.','.','w','a','i','t',' ','f','o','r',' ','i','t',' ','D','A','R','Y','!',' ',' ',' ',' '};
+
+unsigned char i = 0x00;
+unsigned char j;
+unsigned char display[16];
+
+int Tick(int state) {
+        switch(state) {
                 case Start:
                         state = Init;
+                        break;
+
                 case Init:
                         state = Init;
+                        break;
                 default:
                         state = Start;
+                        break;
         }
-
-        switch(state){
+        switch(state) {
                 case Start:
                         break;
                 case Init:
-                        for (int k = 0; k < 16; ++k) {
-                                        lcd[k] = MSG[(k + i) % 40];
+                                for (int j = 0; j < 16; ++j) {
+                                        display[j] = MSG[j + i];
                                 }
-                                i = ((i + 1) % 40);
-                                LCD_DisplayString(1, lcd);
+                                i++;
+                                if(i == 39){
+                                i = 0;
+                                }
+                                LCD_DisplayString(1, display);
                                 break;
                 default:
-                        break;
+                                break;
         }
 
         return state;
 }
 
-int main(void){
+int main(void) {
+    DDRA = 0xF0; PORTA = 0x0F;
     DDRB = 0xFF; PORTB = 0x00;
-    DDRC = 0xF0; PORTC = 0x0F;
+    DDRC = 0xFF; PORTC = 0x00;
     DDRD = 0xFF; PORTD = 0x00;
 
     LCD_init();
@@ -61,14 +71,14 @@ int main(void){
     static task task1;
     task *tasks[] = { &task1 };
     const unsigned short numTasks = sizeof(tasks) / sizeof(task*);
-    const char start = -1;
+    const char start = 0;
 
     task1.state = start;
-    task1.period = 50;
+    task1.period = 8;
     task1.elapsedTime = task1.period;
     task1.TickFct = &Tick;
 
-    TimerSet(50);
+    TimerSet(8);
     TimerOn();
 
     unsigned short i;
@@ -78,7 +88,7 @@ int main(void){
                         tasks[i]->state = tasks[i]->TickFct(tasks[i]->state);
                         tasks[i]->elapsedTime = 0;
                 }
-                tasks[i]->elapsedTime += 50;
+                tasks[i]->elapsedTime += 1;
         }
         while(!TimerFlag);
         TimerFlag = 0;
