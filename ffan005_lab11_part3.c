@@ -12,7 +12,7 @@
 #include "io.h"
 #include <avr/interrupt.h>
 #include <timer.h>
-#include <keypad.h> //directly taken from provided header so it is already finished
+#include <keypad.h> //modified to make pad connect to PINA
 #include <scheduler.h>
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
