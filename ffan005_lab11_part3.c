@@ -94,7 +94,7 @@ int Tick2(int state) {
       state = Init2;
 			break;
 		case Init2:
-      if(keypad == 0x1F) {
+      if(output == 0x1F) {
         state = Init2;
       }	else {
         state = Pause;
@@ -114,7 +114,7 @@ int Tick2(int state) {
 			break;
 		case Pause:	
       LCD_Cursor(1);
-			LCD_WriteData(output);
+			LCD_WriteData(input);
 			break;      
 		default:	break;
 	}
