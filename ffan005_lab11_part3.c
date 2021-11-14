@@ -22,6 +22,7 @@ enum States {Start,Init};
 unsigned char input = 0x00;
 unsigned char output = 0x00;
 
+//code from part 1 to verify correctness
 int Tick(int state){
         input = GetKeypadKey();
         switch(state){
@@ -77,7 +78,7 @@ int Tick(int state){
                         }else {
                                 output = 0x1B;
                         }
-                        PORTB = output;
+                        //PORTB = output;
                         break;
                 default:
                         break;
@@ -91,44 +92,45 @@ enum States2 {Start2, Init2, Pause};
 int Tick2(int state) {
 	switch(state) {
 		case Start2:
-      state = Init2;
+      			state = Init2;
 			break;
 		case Init2:
-      if(output == 0x1F) {
-        state = Init2;
-      }	else {
-        state = Pause;
-      }
+     			if(output == 0x1F) {
+        		state = Init2;
+     			 }	else {
+        		state = Pause;
+      			}
 			break;
 		case Pause:	
-      state = Init2;
+     			 state = Init2;
 		default: 	
-      state = Start2;
+      			state = Start2;
 			break;
 	}
   
 	switch(state) {
 		case Start2:	
-      break;
+     			 break;
 		case Init2:	
 			break;
 		case Pause:	
-      LCD_Cursor(1);
+      			LCD_Cursor(1);
 			LCD_WriteData(input);
 			break;      
-		default:	break;
+		default:	
+			break;
 	}
 	return state;
 }
 
 int main(void) {
-    /* Insert DDR and PORT initializations */
     DDRA = 0x0F; PORTA = 0xF0;
     DDRB = 0xFF; PORTB = 0x00;
     DDRC = 0xFF; PORTC = 0x00;
     DDRD = 0xFF; PORTD = 0x00;
-    /* Insert your solution below */
+
     LCD_init();
+	
     static task task1, task2;
     task *tasks[] = { &task1, &task2 };
     const unsigned short numTasks = sizeof(tasks) / sizeof(task*);
