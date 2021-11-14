@@ -6,7 +6,7 @@
  *
  *      I acknowledge all content contained herein, excluding template or example
  *      code, is my own original work.
- *      Demo: 
+ *      Demo: https://www.youtube.com/watch?v=2txJqcir8SY
  */
 
 #include <avr/io.h>
@@ -137,7 +137,7 @@ int main(void) {
     DDRD = 0xFF; PORTD = 0x00;
 
     LCD_init();
-	  LCD_DisplayString(1, "Congratulations!");
+    LCD_DisplayString(1, "Congratulations!");
   
     static task task1, task2;
     task *tasks[] = { &task1, &task2 };
