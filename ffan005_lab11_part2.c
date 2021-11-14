@@ -32,7 +32,6 @@ int Tick(int state) {
                 case Start:
                         state = Init;
                         break;
-
                 case Init:
                         state = Init;
                         break;
@@ -40,19 +39,21 @@ int Tick(int state) {
                         state = Start;
                         break;
         }
+        
         switch(state) {
                 case Start:
                         break;
                 case Init:
-                                for (int j = 0; j < 16; ++j) {
-                                        display[j] = MSG[j + i];
-                                }
-                                i++;
-                                if(i == 39){
+                        for (int j = 0; j < 16; ++j) {
+                                display[j] = MSG[j + i];
+                        }
+                        i++;
+                        if(i == 39){
                                 i = 0;
-                                }
-                                LCD_DisplayString(1, display);
-                                break;
+                        }
+                        
+                        LCD_DisplayString(1, display);
+                        break;
                 default:
                                 break;
         }
