@@ -91,8 +91,10 @@ int Tick(int state){
 
 
 int main(void){
+    DDRA = 0xFF; PORTA = 0x00;
     DDRB = 0xFF; PORTB = 0x00;
     DDRC = 0xF0; PORTC = 0x0F;
+    DDRD = 0xFF; PORTD = 0x00;
 
     static task task1;
     task *tasks[] = { &task1 };
